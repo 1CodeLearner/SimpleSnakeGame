@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	board(Rect(100.f, 100.f, 20.f, 20.f, Colors::Gray), 20, 20, 5.f, Colors::Blue)
+	board(Rect(0.f, 0.f, 20.f, 20.f, Colors::Gray), 20, 20, 5.f, Colors::Blue)
 {
 }
 

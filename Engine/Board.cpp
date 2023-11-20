@@ -17,18 +17,27 @@ void Board::Draw(Graphics& gfx)
 	float x1 = grid.GetX() + boardSizeX + paddingSize; 
 	float y1 = grid.GetY() + boardSizeY + paddingSize; 
 
-	//Draw outer border from top-left to bottom-right
-	for (int i = x0; i <= x1; i++){
-		for (int j = y0; j <= y1; j++){
-			gfx.PutPixel(i, j, outerColor);
+	if (x0 < 0 || x1 > gfx.ScreenWidth) {
+
+	}
+	else if (y0 < 0 || y1 > gfx.ScreenHeight){
+
+	}
+	else {
+		//Draw outer border from top-left to bottom-right
+		for (int i = x0; i <= x1; i++) {
+			for (int j = y0; j <= y1; j++) {
+				gfx.PutPixel(i, j, outerColor);
+			}
+		}
+
+		//Draw playing board within outer border
+		for (int i = grid.GetX(); i <= grid.GetX() + boardSizeX; i++) {
+			for (int j = grid.GetY(); j <= grid.GetY() + boardSizeY; j++) {
+				gfx.PutPixel(i, j, grid.GetColor());
+			}
 		}
 	}
 
-	//Draw playing board within outer border
-	for (int i = grid.GetX(); i <= grid.GetX() + boardSizeX; i++) {
-		for (int j = grid.GetY(); j <= grid.GetY() + boardSizeY; j++) {
-			gfx.PutPixel(i, j, grid.GetColor());
-		}
-	}
 
 }
