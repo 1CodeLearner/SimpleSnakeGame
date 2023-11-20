@@ -4,14 +4,15 @@
 
 class Rect {
 public:
-	Rect();
+	Rect(float in_x, float in_y, float in_width, float in_height, Color in_color);
 
 public:
 	void Draw(Graphics& gfx);
+	void Move(const float in_x, const float in_y);
 private:
-	int x = 0;
-	int y = 0;
-	int width = 0; 
-	int height = 0;
+	float x = 0;
+	float y = 0;
+	float width = 0; 
+	float height = 0;
 	Color color;
 };

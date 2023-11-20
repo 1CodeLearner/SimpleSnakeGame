@@ -47,5 +47,6 @@ private:
 	/*  User Variables              */
 	bool bSpacePressed = false;
 	Rect rect;
+	float speed = 5;
 	/********************************/
 };

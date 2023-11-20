@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	rect(10.f, 10.f, 100.f, 200.f, Colors::Green)
 {
 }
 
@@ -42,9 +43,8 @@ void Game::UpdateModel()
 		bSpacePressed = true;
 	}
 	
-	if (wnd.kbd.KeyIsPressed(VK_UP) {
-
-	}
+	//if (wnd.kbd.KeyIsPressed(VK_UP) {
+	//}
 
 }
 
