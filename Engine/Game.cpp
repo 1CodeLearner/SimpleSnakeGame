@@ -38,8 +38,21 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
+		bSpacePressed = true;
+	}
+	
+	if (wnd.kbd.KeyIsPressed(VK_UP) {
+
+	}
+
 }
 
 void Game::ComposeFrame()
 {
+	if (bSpacePressed) {
+		rect.Draw(gfx);
+	}
+	
+
 }
