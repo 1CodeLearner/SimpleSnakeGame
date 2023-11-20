@@ -42,10 +42,21 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
 		bSpacePressed = true;
 	}
+	else
+		bSpacePressed = false;
 	
-	//if (wnd.kbd.KeyIsPressed(VK_UP) {
-	//}
-
+	if (wnd.kbd.KeyIsPressed(VK_UP)) {
+		rect.Move(0.f, -speed, gfx);
+	}
+	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+		rect.Move(0.f, speed, gfx);
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		rect.Move(speed, 0.f, gfx);
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+		rect.Move(-speed, 0.f, gfx);
+	}
 }
 
 void Game::ComposeFrame()

@@ -8,7 +8,7 @@ public:
 
 public:
 	void Draw(Graphics& gfx);
-	void Move(const float in_x, const float in_y);
+	void Move(const float in_x, const float in_y, const Graphics& gfx);
 private:
 	float x = 0;
 	float y = 0;
