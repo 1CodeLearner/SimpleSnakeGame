@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	rect(10.f, 10.f, 100.f, 200.f, Colors::Green)
+	grid(Rect(10.f, 10.f, 100.f, 200.f, Colors::Gray), 10.f, Colors::Blue)
 {
 }
 
@@ -46,24 +46,24 @@ void Game::UpdateModel()
 		bSpacePressed = false;
 	
 	if (wnd.kbd.KeyIsPressed(VK_UP)) {
-		rect.Move(0.f, -speed, gfx);
+
 	}
 	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
-		rect.Move(0.f, speed, gfx);
+
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
-		rect.Move(speed, 0.f, gfx);
+
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
-		rect.Move(-speed, 0.f, gfx);
+
 	}
 }
 
 void Game::ComposeFrame()
 {
-	if (bSpacePressed) {
-		rect.Draw(gfx);
-	}
-	
+	//if (bSpacePressed) {
+	//	rect.Draw(gfx);
+	//}
+	grid.Draw(gfx);
 
 }

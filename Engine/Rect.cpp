@@ -23,3 +23,23 @@ void Rect::Move(const float in_x, const float in_y, const Graphics& gfx)
 	if(y + height + in_y <= (float)gfx.ScreenHeight && y + in_y >= 0.f)
 		y += in_y;
 }
+
+float Rect::GetX() const
+{
+	return x; 
+}
+
+float Rect::GetY() const
+{
+	return y;
+}
+
+float Rect::GetWidth() const
+{
+	return width;
+}
+
+float Rect::GetHeight() const
+{
+	return height;
+}

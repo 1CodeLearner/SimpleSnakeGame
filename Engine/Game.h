@@ -23,7 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Rect.h"
+#include "Grid.h"
 
 
 
@@ -46,7 +46,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	bool bSpacePressed = false;
-	Rect rect;
-	float speed = 5.f;
+	Grid grid;
 	/********************************/
 };
