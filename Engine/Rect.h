@@ -13,6 +13,7 @@ public:
 	virtual float GetY() const;
 	virtual float GetWidth() const;
 	virtual float GetHeight() const;
+	virtual Color GetColor() const;
 protected:
 	float x = 0;
 	float y = 0;

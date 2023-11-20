@@ -43,3 +43,8 @@ float Rect::GetHeight() const
 {
 	return height;
 }
+
+Color Rect::GetColor() const
+{
+	return color;
+}

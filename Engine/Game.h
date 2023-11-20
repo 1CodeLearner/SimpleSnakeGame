@@ -23,7 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Grid.h"
+#include "Board.h"
 
 
 
@@ -46,6 +46,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	bool bSpacePressed = false;
-	Grid grid;
+	Board board;
 	/********************************/
 };

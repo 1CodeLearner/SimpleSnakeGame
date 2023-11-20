@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	grid(Rect(10.f, 10.f, 100.f, 200.f, Colors::Gray), 10.f, Colors::Blue)
+	board(Rect(100.f, 100.f, 20.f, 20.f, Colors::Gray), 20, 20, 5.f, Colors::Blue)
 {
 }
 
@@ -64,6 +64,6 @@ void Game::ComposeFrame()
 	//if (bSpacePressed) {
 	//	rect.Draw(gfx);
 	//}
-	grid.Draw(gfx);
+	board.Draw(gfx);
 
 }
