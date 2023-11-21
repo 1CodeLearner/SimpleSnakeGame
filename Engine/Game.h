@@ -24,7 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Board.h"
-
+#include "Snake.h"
 
 
 class Game
@@ -51,5 +51,7 @@ private:
 	static constexpr int boardHeightTotal = 20;
 	static constexpr float gridWidth = 25;
 	static constexpr float gridHeight = 25;
+
+	Snake snek;
 	/********************************/
 };
