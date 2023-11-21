@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <assert.h>
 
 Board::Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor)
 	: grid(in_grid), gridWidthAmount(in_gridWidthAmount), gridHeightAmount(in_gridHeightAmount), paddingSize(in_paddingSize), outerColor(in_outerColor)
@@ -40,4 +41,16 @@ void Board::Draw(Graphics& gfx)
 	}
 
 
+}
+
+void Board::DrawEntity(int in_x, int in_y, Color in_color, Graphics& gfx)
+{
+	assert(in_x < gridWidthAmount);
+	assert(in_y < gridHeightAmount);
+	
+	int leftGrid = grid.GetX() + in_x * grid.GetWidth();
+	int topGrid = grid.GetY() + in_y * grid.GetHeight();
+
+	Rect rectToDraw = Rect(topGrid, leftGrid, grid.GetWidth(), grid.GetHeight(), in_color);
+	rectToDraw.Draw(gfx);
 }

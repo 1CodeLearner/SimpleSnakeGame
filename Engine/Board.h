@@ -10,6 +10,7 @@ public:
 
 	void Draw(Graphics& gfx);
 
+	void DrawEntity(int in_x, int in_y, Color in_color, Graphics& gfx);
 
 private:
 	Rect grid;

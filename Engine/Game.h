@@ -47,5 +47,9 @@ private:
 	/*  User Variables              */
 	bool bSpacePressed = false;
 	Board board;
+	static constexpr int boardWidthTotal = 20;
+	static constexpr int boardHeightTotal = 20;
+	static constexpr float gridWidth = 25;
+	static constexpr float gridHeight = 25;
 	/********************************/
 };

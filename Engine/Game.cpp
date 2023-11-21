@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	board(Rect(0.f, 0.f, 20.f, 20.f, Colors::Gray), 20, 20, 5.f, Colors::Blue)
+	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue)
 {
 }
 
@@ -36,6 +36,7 @@ void Game::Go()
 	ComposeFrame();
 	gfx.EndFrame();
 }
+
 
 void Game::UpdateModel()
 {
@@ -65,5 +66,6 @@ void Game::ComposeFrame()
 	//	rect.Draw(gfx);
 	//}
 	board.Draw(gfx);
-
+	board.DrawEntity(0, 0, Colors::Green, gfx);
+	board.DrawEntity(19, 19, Colors::Green, gfx);
 }
