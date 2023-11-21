@@ -53,5 +53,6 @@ private:
 	static constexpr float gridHeight = 25;
 
 	Snake snek;
+	bool inhibitUp = false;
 	/********************************/
 };

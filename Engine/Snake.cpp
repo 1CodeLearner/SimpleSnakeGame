@@ -10,10 +10,11 @@ Snake::Snake(int loc_x, int loc_y, Color c)
 
 void Snake::Move(const int move_x, const int move_y)
 {
-	assert(move_x <= 1 && move_x >= 0);
-	assert(move_y <= 1 && move_y >= 0);
-
+	assert(move_x <= 1 && move_x >= -1);
+	assert(move_y <= 1 && move_y >= -1);
 	
+	head.loc_x += move_x; 
+	head.loc_y += move_y; 
 }
 
 int Snake::GetSegmentX() const

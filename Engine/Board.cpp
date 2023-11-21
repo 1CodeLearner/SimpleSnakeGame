@@ -51,6 +51,6 @@ void Board::DrawEntity(int in_x, int in_y, Color in_color, Graphics& gfx)
 	int leftGrid = grid.GetX() + in_x * grid.GetWidth();
 	int topGrid = grid.GetY() + in_y * grid.GetHeight();
 
-	Rect rectToDraw = Rect(topGrid, leftGrid, grid.GetWidth(), grid.GetHeight(), in_color);
+	Rect rectToDraw = Rect(leftGrid, topGrid, grid.GetWidth(), grid.GetHeight(), in_color);
 	rectToDraw.Draw(gfx);
 }

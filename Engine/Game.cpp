@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -21,18 +21,18 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
+	wnd(wnd),
+	gfx(wnd),
 	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue),
-	snek(2,2,Colors::Blue)
+	snek(2, 2, Colors::Blue)
 {
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -46,17 +46,30 @@ void Game::UpdateModel()
 	}
 	else
 		bSpacePressed = false;
-	
-	if (wnd.kbd.KeyIsPressed(VK_UP)) {
 
+	if (wnd.kbd.KeyIsPressed(VK_UP)) {
+		if (inhibitUp)
+		{
+		}
+		else {
+			snek.Move(0, -1);
+			inhibitUp = true;
+		}
 	}
+	else {
+		inhibitUp = false;
+	}
+
 	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+		snek.Move(0, 1);
 
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		snek.Move(1, 0);
 
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+		snek.Move(-1, 0);
 
 	}
 }
@@ -67,7 +80,5 @@ void Game::ComposeFrame()
 	//	rect.Draw(gfx);
 	//}
 	board.Draw(gfx);
-	board.DrawEntity(0, 0, Colors::Green, gfx);
-	board.DrawEntity(19, 19, Colors::Green, gfx);
 	board.DrawEntity(snek.GetSegmentX(), snek.GetSegmentY(), snek.GetColor(), gfx);
 }
