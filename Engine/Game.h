@@ -45,7 +45,6 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	bool bSpacePressed = false;
 	Board board;
 	static constexpr int boardWidthTotal = 20;
 	static constexpr int boardHeightTotal = 20;
@@ -54,5 +53,9 @@ private:
 
 	Snake snek;
 	bool inhibitUp = false;
+	bool inhibitDown = false;
+	bool inhibitLeft = false;
+	bool inhibitRight = false;
+	bool inhibitSpace = false;
 	/********************************/
 };

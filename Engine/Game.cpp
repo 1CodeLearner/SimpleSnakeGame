@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue,gfx),
-	snek(2, 2, Colors::Blue, gfx)
+	snek(2, 2, Colors::Blue, Colors::Green, gfx)
 {
 }
 
@@ -42,10 +42,16 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
-		bSpacePressed = true;
+		if ( !inhibitSpace )
+		{
+			snek.Grow();
+			inhibitSpace = true;
+		}
 	}
-	else
-		bSpacePressed = false;
+	else {
+		inhibitSpace = false;
+	}
+
 
 	if (wnd.kbd.KeyIsPressed(VK_UP)) {
 		if (inhibitUp)
@@ -61,16 +67,41 @@ void Game::UpdateModel()
 	}
 
 	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
-		snek.Move(0, 1);
-
+		if (inhibitDown)
+		{
+		}
+		else {
+			snek.Move(0, 1);
+			inhibitDown = true;
+		}
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
-		snek.Move(1, 0);
+	else {
+		inhibitDown = false;
+	}
 
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		if (inhibitRight)
+		{
+		}
+		else {
+			snek.Move(1, 0);
+			inhibitRight = true;
+		}
+	}
+	else {
+		inhibitRight = false;
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
-		snek.Move(-1, 0);
-
+		if (inhibitLeft)
+		{
+		}
+		else {
+			snek.Move(-1, 0);
+			inhibitLeft = true;
+		}
+	}
+	else {
+		inhibitLeft = false;
 	}
 }
 

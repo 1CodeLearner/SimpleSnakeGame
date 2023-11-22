@@ -7,24 +7,29 @@
 class Snake
 {
 public:
-	Snake(int loc_x, int loc_y, Color c, Graphics& in_gfx);
+	Snake(int loc_x, int loc_y, Color in_headColor, 
+		Color in_bodyColor, Graphics& in_gfx);
 public:
 	void Move(const int move_x, const int move_y);
+	void Grow();
 	void Draw(Board& brd);
-private:
-	int GetSegmentX() const;
-	int GetSegmentY() const;
-	Color GetColor() const;
 private:
 	class Segment {
 	public:
-		int loc_x;
-		int loc_y;
+		Segment(){}
+		Segment(int in_x, int in_y, Color in_c) 
+			: loc_x(in_x), loc_y(in_y), color(in_c)
+		{}
+	public:
+		int loc_x = 0;
+		int loc_y = 0;
 		Color color;
 	};
 	static constexpr int segTotalSize = 100;
+	int GrowthAmount = 1;
 	int segCurrentSize = 0;
-	Segment body[segTotalSize];
 	Segment head;
 	Graphics& gfx;
+	Color bodyColor;
+	Segment* body[segTotalSize];
 };
