@@ -57,5 +57,8 @@ private:
 	bool inhibitLeft = false;
 	bool inhibitRight = false;
 	bool inhibitSpace = false;
+
+	int frameCounterMax = 20;
+	int frameCounter = 0;
 	/********************************/
 };

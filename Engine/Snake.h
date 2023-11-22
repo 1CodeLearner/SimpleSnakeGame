@@ -10,7 +10,8 @@ public:
 	Snake(int loc_x, int loc_y, Color in_headColor, 
 		Color in_bodyColor, Graphics& in_gfx);
 public:
-	void Move(const int move_x, const int move_y);
+	void ChangeMoveDirection(const int move_x, const int move_y);
+	void Move();
 	void Grow();
 	void Draw(Board& brd);
 private:
@@ -31,11 +32,17 @@ private:
 		int loc_y = 0;
 		Color color;
 	};
-	static constexpr int segTotalSize = 100;
-	int GrowthAmount = 1;
-	int segCurrentSize = 0;
 	Segment head;
-	Graphics& gfx;
 	Color bodyColor;
+	int GrowthAmount = 1;
+	static constexpr int segTotalSize = 100;
+	int segCurrentSize = 0;
 	Segment* body[segTotalSize];
+
+	int newMoveDirX = 1;
+	int newMoveDirY = 0;
+	int moveDirX = 1;
+	int moveDirY = 0;
+
+	Graphics& gfx;
 };

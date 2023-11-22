@@ -58,7 +58,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.Move(0, -1);
+			snek.ChangeMoveDirection(0, -1);
 			inhibitUp = true;
 		}
 	}
@@ -71,7 +71,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.Move(0, 1);
+			snek.ChangeMoveDirection(0, 1);
 			inhibitDown = true;
 		}
 	}
@@ -84,7 +84,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.Move(1, 0);
+			snek.ChangeMoveDirection(1, 0);
 			inhibitRight = true;
 		}
 	}
@@ -96,21 +96,29 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.Move(-1, 0);
+			snek.ChangeMoveDirection(-1, 0);
 			inhibitLeft = true;
 		}
 	}
 	else {
 		inhibitLeft = false;
 	}
+	
+	if (frameCounter != frameCounterMax)
+	{
+		frameCounter++;
+	}
+	else
+	{
+		snek.Move();
+		frameCounter = 0;
+	}
 }
 
 void Game::ComposeFrame()
 {
-	//if (bSpacePressed) {
-	//	rect.Draw();
-	//}
 	board.Draw();
 	snek.Draw(board);
+
 	
 }

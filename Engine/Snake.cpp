@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include <assert.h>
 
-Snake::Snake(int loc_x, int loc_y, Color in_headColor, 
+Snake::Snake(int loc_x, int loc_y, Color in_headColor,
 	Color in_bodyColor, Graphics& in_gfx)
 	: gfx(in_gfx)
 {
@@ -12,12 +12,19 @@ Snake::Snake(int loc_x, int loc_y, Color in_headColor,
 	bodyColor = in_bodyColor;
 }
 
-void Snake::Move(const int move_x, const int move_y)
+void Snake::ChangeMoveDirection(const int move_x, const int move_y)
 {
 	assert(move_x <= 1 && move_x >= -1);
 	assert(move_y <= 1 && move_y >= -1);
-	
-	if(segCurrentSize != 0)
+
+	newMoveDirX = move_x;
+	newMoveDirY = move_y;
+
+}
+
+void Snake::Move()
+{
+	if (segCurrentSize != 0)
 	{
 		for (int i = segCurrentSize - 1; i > 0; i--)
 		{
@@ -26,17 +33,23 @@ void Snake::Move(const int move_x, const int move_y)
 
 		body[0]->FollowNextSeg(head);
 	}
-	head.loc_x += move_x; 
-	head.loc_y += move_y; 
+	
+	if ( -newMoveDirX != moveDirX || -newMoveDirY != moveDirY)
+	{
+		moveDirX = newMoveDirX;
+		moveDirY = newMoveDirY;
+	}
+	head.loc_x += moveDirX;
+	head.loc_y += moveDirY;
 }
 
 void Snake::Grow()
 {
-	if(segCurrentSize == segTotalSize)
+	if (segCurrentSize == segTotalSize)
 	{
 		//Victory screen maybe, some event here.
 	}
-	else 
+	else
 	{
 		/*if (segCurrentSize == 0)
 		{
