@@ -10,8 +10,8 @@ Board::Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, floa
 void Board::Draw()
 {
 	//find playing board size in pixel counts
-	float boardSizeX = grid.GetWidth() * gridWidthAmount;
-	float boardSizeY = grid.GetHeight() * gridHeightAmount;
+	float boardSizeX = grid.GetWidth() * (float)gridWidthAmount;
+	float boardSizeY = grid.GetHeight() * (float)gridHeightAmount;
 
 	//Find outer border coordinates
 	float x0 = grid.GetX() - paddingSize; 
@@ -27,15 +27,15 @@ void Board::Draw()
 	}
 	else {
 		//Draw outer border from top-left to bottom-right
-		for (int i = x0; i <= x1; i++) {
-			for (int j = y0; j <= y1; j++) {
+		for (int i = (int)x0; i <= (int)x1; i++) {
+			for (int j = (int)y0; j <= (int)y1; j++) {
 				gfx.PutPixel(i, j, outerColor);
 			}
 		}
 
 		//Draw playing board within outer border
-		for (int i = grid.GetX(); i <= grid.GetX() + boardSizeX; i++) {
-			for (int j = grid.GetY(); j <= grid.GetY() + boardSizeY; j++) {
+		for (int i = (int)grid.GetX(); i <= (int)(grid.GetX() + boardSizeX); i++) {
+			for (int j = (int)grid.GetY(); j <= (int)(grid.GetY() + boardSizeY); j++) {
 				gfx.PutPixel(i, j, grid.GetColor());
 			}
 		}
@@ -49,8 +49,8 @@ void Board::DrawEntity(int in_x, int in_y, Color in_color)
 	assert(in_x < gridWidthAmount);
 	assert(in_y < gridHeightAmount);
 	
-	int leftGrid = grid.GetX() + in_x * grid.GetWidth();
-	int topGrid = grid.GetY() + in_y * grid.GetHeight();
+	float leftGrid = grid.GetX() + (float)in_x * grid.GetWidth();
+	float topGrid = grid.GetY() + (float)in_y * grid.GetHeight();
 
 	Rect rectToDraw = Rect(leftGrid, topGrid, grid.GetWidth(), grid.GetHeight(), in_color);
 	rectToDraw.Draw(gfx);
