@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include "Board.h"
 #include "Location.h"
+#include "Snake.h"
 
 class Food 
 {
@@ -10,8 +11,8 @@ public:
 	Food() {};
 	Food(Location in_loc, Color in_color);
 public:
-	void SetEaten();
-	void Draw(Board& brd);
+	bool IsBeingEaten(const Snake& snek);
+	void Draw(Board& brd) const;
 private:
 	Location loc;
 	Color color;

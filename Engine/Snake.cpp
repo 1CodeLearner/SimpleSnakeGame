@@ -59,7 +59,7 @@ void Snake::Grow()
 	}
 }
 
-void Snake::Draw(Board& brd)
+void Snake::Draw(Board& brd) const
 {
 	if (segCurrentSize != 0)
 	{
@@ -70,4 +70,9 @@ void Snake::Draw(Board& brd)
 	}
 	brd.DrawEntity(head.loc, head.color);
 
+}
+
+Location Snake::GetLocation() const
+{
+	return head.loc;
 }

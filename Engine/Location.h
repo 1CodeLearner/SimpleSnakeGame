@@ -17,6 +17,11 @@ struct Location
 		return *this;
 	}
 
+	bool operator== (const Location& otherLoc)
+	{
+		return x == otherLoc.x && y == otherLoc.y;
+	}
+
 	int x = 0; 
 	int y = 0;
 };

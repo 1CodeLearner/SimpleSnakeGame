@@ -41,17 +41,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
-		if ( !inhibitSpace )
-		{
-			snek.Grow();
-			inhibitSpace = true;
-		}
+	if (food.IsBeingEaten(snek)) 
+	{
+		snek.Grow();
 	}
-	else {
-		inhibitSpace = false;
-	}
-
 
 	if (wnd.kbd.KeyIsPressed(VK_UP)) {
 		if (inhibitUp)

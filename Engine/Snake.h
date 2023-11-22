@@ -14,7 +14,8 @@ public:
 	void ChangeMoveDirection(Location in_newDeltaLoc);
 	void Move();
 	void Grow();
-	void Draw(Board& brd);
+	void Draw(Board& brd) const;
+	Location GetLocation() const;
 private:
 	class Segment {
 	public:
