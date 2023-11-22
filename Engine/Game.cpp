@@ -26,7 +26,8 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue,gfx),
-	snek(2, 2, Colors::Blue, Colors::Green, gfx)
+	snek(2, 2, Colors::Blue, Colors::Yellow, gfx),
+	food(foodLocX, foodLocY, foodColor)
 {
 }
 
@@ -44,7 +45,6 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
 		if ( !inhibitSpace )
 		{
-			snek.Grow();
 			inhibitSpace = true;
 		}
 	}
@@ -118,7 +118,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	board.Draw();
+	food.Draw(board);
 	snek.Draw(board);
-
 	
 }

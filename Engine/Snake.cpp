@@ -12,6 +12,11 @@ Snake::Snake(int loc_x, int loc_y, Color in_headColor,
 	bodyColor = in_bodyColor;
 }
 
+Snake::~Snake()
+{
+	//delete[] body;
+}
+
 void Snake::ChangeMoveDirection(const int move_x, const int move_y)
 {
 	assert(move_x <= 1 && move_x >= -1);
@@ -51,17 +56,6 @@ void Snake::Grow()
 	}
 	else
 	{
-		/*if (segCurrentSize == 0)
-		{
-			Segment* temp_seg = new Segment(head.loc_x, head.loc_y, bodyColor);
-			body[segCurrentSize] = temp_seg;
-		}
-		else
-		{
-			Segment* temp_seg = new Segment(body[segCurrentSize-1]->loc_x,
-				body[segCurrentSize - 1]->loc_y, bodyColor);
-			body[segCurrentSize] = temp_seg;
-		}*/
 		Segment* temp_seg = new Segment(head.loc_x, head.loc_y, bodyColor);
 		body[segCurrentSize] = temp_seg;
 

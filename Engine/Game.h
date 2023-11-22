@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Board.h"
 #include "Snake.h"
+#include "Food.h"
 
 
 class Game
@@ -57,6 +58,11 @@ private:
 	bool inhibitLeft = false;
 	bool inhibitRight = false;
 	bool inhibitSpace = false;
+
+	Food food;
+	static constexpr int foodLocX = 5; 
+	static constexpr int foodLocY = 2;
+	Color foodColor = Colors::Green;
 
 	int frameCounterMax = 20;
 	int frameCounter = 0;

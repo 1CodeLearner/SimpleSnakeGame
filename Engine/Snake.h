@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Colors.h"
 #include "Board.h"
 #include "Graphics.h"
 
@@ -9,6 +8,7 @@ class Snake
 public:
 	Snake(int loc_x, int loc_y, Color in_headColor, 
 		Color in_bodyColor, Graphics& in_gfx);
+	~Snake();
 public:
 	void ChangeMoveDirection(const int move_x, const int move_y);
 	void Move();
@@ -33,11 +33,11 @@ private:
 		Color color;
 	};
 	Segment head;
-	Color bodyColor;
 	int GrowthAmount = 1;
 	static constexpr int segTotalSize = 100;
 	int segCurrentSize = 0;
 	Segment* body[segTotalSize];
+	Color bodyColor;
 
 	int newMoveDirX = 1;
 	int newMoveDirY = 0;
