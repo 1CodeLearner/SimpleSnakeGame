@@ -25,8 +25,8 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue),
-	snek(2, 2, Colors::Blue)
+	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue,gfx),
+	snek(2, 2, Colors::Blue, gfx)
 {
 }
 
@@ -77,8 +77,9 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	//if (bSpacePressed) {
-	//	rect.Draw(gfx);
+	//	rect.Draw();
 	//}
-	board.Draw(gfx);
-	board.DrawEntity(snek.GetSegmentX(), snek.GetSegmentY(), snek.GetColor(), gfx);
+	board.Draw();
+	snek.Draw(board);
+	
 }

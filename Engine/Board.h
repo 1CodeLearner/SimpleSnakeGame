@@ -6,11 +6,11 @@
 class Board
 {
 public:
-	Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor);
+	Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor, Graphics& gfx);
 
-	void Draw(Graphics& gfx);
+	void Draw();
 
-	void DrawEntity(int in_x, int in_y, Color in_color, Graphics& gfx);
+	void DrawEntity(int in_x, int in_y, Color in_color);
 
 private:
 	Rect grid;
@@ -18,5 +18,6 @@ private:
 	int gridHeightAmount;
 	float paddingSize;
 	Color outerColor;
+	Graphics& gfx;
 		
 };
