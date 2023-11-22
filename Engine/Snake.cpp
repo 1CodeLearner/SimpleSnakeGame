@@ -17,6 +17,15 @@ void Snake::Move(const int move_x, const int move_y)
 	assert(move_x <= 1 && move_x >= -1);
 	assert(move_y <= 1 && move_y >= -1);
 	
+	if(segCurrentSize != 0)
+	{
+		for (int i = segCurrentSize - 1; i > 0; i--)
+		{
+			body[i]->FollowNextSeg(*body[i - 1]);
+		}
+
+		body[0]->FollowNextSeg(head);
+	}
 	head.loc_x += move_x; 
 	head.loc_y += move_y; 
 }

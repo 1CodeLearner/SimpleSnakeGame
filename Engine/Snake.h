@@ -21,6 +21,12 @@ private:
 			: loc_x(in_x), loc_y(in_y), color(in_c)
 		{}
 	public:
+		void FollowNextSeg(Segment& next_seg)
+		{
+			loc_x = next_seg.loc_x;
+			loc_y = next_seg.loc_y;
+		}
+	public:
 		int loc_x = 0;
 		int loc_y = 0;
 		Color color;
