@@ -10,7 +10,7 @@ void Rect::Draw(Graphics& gfx)
 	//Draw pixels from top-left to bottom-right
 	for (float in_x = x; in_x < x + width; in_x++) {
 		for (float in_y = y; in_y < y + height; in_y++) {
-			gfx.PutPixel(in_x, in_y, color);
+			gfx.PutPixel((int)in_x, (int)in_y, color);
 		}
 	}
 }
