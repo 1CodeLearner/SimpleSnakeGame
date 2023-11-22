@@ -44,13 +44,13 @@ void Board::Draw()
 
 }
 
-void Board::DrawEntity(int in_x, int in_y, Color in_color)
+void Board::DrawEntity(Location in_loc, Color in_color)
 {
-	assert(in_x < gridWidthAmount);
-	assert(in_y < gridHeightAmount);
+	assert(in_loc.x < gridWidthAmount);
+	assert(in_loc.y < gridHeightAmount);
 	
-	float leftGrid = grid.GetX() + (float)in_x * grid.GetWidth();
-	float topGrid = grid.GetY() + (float)in_y * grid.GetHeight();
+	float leftGrid = grid.GetX() + (float)in_loc.x * grid.GetWidth();
+	float topGrid = grid.GetY() + (float)in_loc.y * grid.GetHeight();
 
 	Rect rectToDraw = Rect(leftGrid, topGrid, grid.GetWidth(), grid.GetHeight(), in_color);
 	rectToDraw.Draw(gfx);

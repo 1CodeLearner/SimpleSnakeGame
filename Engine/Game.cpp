@@ -26,10 +26,9 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue,gfx),
-	snek(2, 2, Colors::Blue, Colors::Yellow, gfx),
-	food(foodLocX, foodLocY, foodColor)
-{
-}
+	snek(Location(2, 2), Colors::Blue, Colors::Yellow, gfx),
+	food(Location(2, 5), foodColor)
+{}
 
 void Game::Go()
 {
@@ -45,6 +44,7 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) {
 		if ( !inhibitSpace )
 		{
+			snek.Grow();
 			inhibitSpace = true;
 		}
 	}
@@ -58,7 +58,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.ChangeMoveDirection(0, -1);
+			snek.ChangeMoveDirection(Location(0, -1));
 			inhibitUp = true;
 		}
 	}
@@ -71,7 +71,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.ChangeMoveDirection(0, 1);
+			snek.ChangeMoveDirection(Location(0, 1));
 			inhibitDown = true;
 		}
 	}
@@ -84,7 +84,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.ChangeMoveDirection(1, 0);
+			snek.ChangeMoveDirection(Location(1, 0));
 			inhibitRight = true;
 		}
 	}
@@ -96,7 +96,7 @@ void Game::UpdateModel()
 		{
 		}
 		else {
-			snek.ChangeMoveDirection(-1, 0);
+			snek.ChangeMoveDirection(Location(-1, 0));
 			inhibitLeft = true;
 		}
 	}

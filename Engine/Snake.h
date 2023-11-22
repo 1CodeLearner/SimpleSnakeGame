@@ -2,15 +2,16 @@
 
 #include "Board.h"
 #include "Graphics.h"
+#include "Location.h"
 
 class Snake
 {
 public:
-	Snake(int loc_x, int loc_y, Color in_headColor, 
+	Snake(Location in_loc, Color in_headColor, 
 		Color in_bodyColor, Graphics& in_gfx);
 	~Snake();
 public:
-	void ChangeMoveDirection(const int move_x, const int move_y);
+	void ChangeMoveDirection(Location in_newDeltaLoc);
 	void Move();
 	void Grow();
 	void Draw(Board& brd);
@@ -18,18 +19,18 @@ private:
 	class Segment {
 	public:
 		Segment(){}
-		Segment(int in_x, int in_y, Color in_c) 
-			: loc_x(in_x), loc_y(in_y), color(in_c)
-		{}
+		Segment(Location in_loc, Color in_c) 
+			: color(in_c)
+		{
+			loc = in_loc;
+		}
 	public:
 		void FollowNextSeg(Segment& next_seg)
 		{
-			loc_x = next_seg.loc_x;
-			loc_y = next_seg.loc_y;
+			loc = next_seg.loc;
 		}
 	public:
-		int loc_x = 0;
-		int loc_y = 0;
+		Location loc;
 		Color color;
 	};
 	Segment head;
@@ -39,10 +40,8 @@ private:
 	Segment* body[segTotalSize];
 	Color bodyColor;
 
-	int newMoveDirX = 1;
-	int newMoveDirY = 0;
-	int moveDirX = 1;
-	int moveDirY = 0;
+	Location newDeltaLoc = { 1, 0 };
+	Location deltaLoc = { 1, 0 };
 
 	Graphics& gfx;
 };

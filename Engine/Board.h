@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "Rect.h"
+#include "Location.h"
 
 class Board
 {
@@ -10,7 +11,7 @@ public:
 
 	void Draw();
 
-	void DrawEntity(int in_x, int in_y, Color in_color);
+	void DrawEntity(Location in_loc, Color in_color);
 
 private:
 	Rect grid;

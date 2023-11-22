@@ -26,7 +26,7 @@
 #include "Board.h"
 #include "Snake.h"
 #include "Food.h"
-
+#include "Location.h"
 
 class Game
 {
@@ -60,8 +60,6 @@ private:
 	bool inhibitSpace = false;
 
 	Food food;
-	static constexpr int foodLocX = 5; 
-	static constexpr int foodLocY = 2;
 	Color foodColor = Colors::Green;
 
 	int frameCounterMax = 20;
