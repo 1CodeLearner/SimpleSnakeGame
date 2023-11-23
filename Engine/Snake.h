@@ -11,12 +11,12 @@ public:
 		Color in_bodyColor, Graphics& in_gfx);
 	~Snake();
 public:
-	void ChangeMoveDirection(Location in_newDeltaLoc);
+	void ChangeMoveDirection(const Location in_newDeltaLoc);
 	void Move();
 	void Grow();
 	void Draw(Board& brd) const;
 	Location GetNextLocation() const;
-	
+	bool WillCollideWithItself() const;
 private:
 	class Segment {
 	public:

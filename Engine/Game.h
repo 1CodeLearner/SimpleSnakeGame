@@ -65,5 +65,6 @@ private:
 	int frameCounterMax = 5;
 	int frameCounter = 0;
 	bool isGameOver = false;
+	bool GrowOnYourOwnPlz = false;
 	/********************************/
 };

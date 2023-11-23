@@ -16,7 +16,7 @@ Snake::~Snake()
 	//delete[] body;
 }
 
-void Snake::ChangeMoveDirection(Location in_newDeltaLoc)
+void Snake::ChangeMoveDirection(const Location in_newDeltaLoc)
 {
 	assert(in_newDeltaLoc.x <= 1 && in_newDeltaLoc.x >= -1);
 	assert(in_newDeltaLoc.y <= 1 && in_newDeltaLoc.y >= -1);
@@ -75,4 +75,17 @@ void Snake::Draw(Board& brd) const
 Location Snake::GetNextLocation() const
 {
 	return head.loc + newDeltaLoc;
+}
+
+bool Snake::WillCollideWithItself() const
+{
+	bool isCollidingWithBody = false;
+	for (int i = 0; i < segCurrentSize; i++)
+	{
+		if (GetNextLocation() == body[i]->loc) 
+		{
+			return true;
+		}
+	}
+	return isCollidingWithBody;
 }

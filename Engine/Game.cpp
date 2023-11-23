@@ -45,6 +45,11 @@ void Game::UpdateModel()
 
 	if (!isGameOver)
 	{
+		if (wnd.kbd.KeyIsPressed(VK_SPACE))
+		{
+			GrowOnYourOwnPlz = true;
+		}
+
 		if (wnd.kbd.KeyIsPressed(VK_UP)) {
 			if (inhibitUp)
 			{
@@ -102,23 +107,25 @@ void Game::UpdateModel()
 		}
 		else
 		{
-			if (!board.IsEntityOutOfBounds(snek))
+			if (board.IsEntityOutOfBounds(snek) || snek.WillCollideWithItself())
 			{
+				isGameOver = true;
+			}
+			else {
 				//Where game action happens, check all events here.
 				if (food.IsBeingEaten(snek))
 				{
 					snek.Grow();
 				}
+				if (GrowOnYourOwnPlz)
+				{
+					snek.Grow();
+					GrowOnYourOwnPlz = false;
+				}
 				snek.Move();
 				frameCounter = 0;
 			}
-			else {
-				isGameOver = true;
-			}
-
 		}
-
-
 	}
 }
 
@@ -127,5 +134,4 @@ void Game::ComposeFrame()
 	board.Draw();
 	food.Draw(board);
 	snek.Draw(board);
-
 }
