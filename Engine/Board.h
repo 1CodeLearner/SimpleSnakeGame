@@ -18,7 +18,7 @@ private:
 	Color outerColor;
 	Graphics& gfx;
 public:
-	static constexpr int gridWidthAmount = 20;
-	static constexpr int gridHeightAmount = 20;
+	static constexpr int gridWidthAmount = 10;
+	static constexpr int gridHeightAmount = 10;
 		
 };

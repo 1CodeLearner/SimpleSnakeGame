@@ -50,8 +50,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Board board;
-	static constexpr float gridWidth = 25;
-	static constexpr float gridHeight = 25;
 
 	Snake snek;
 	bool inhibitUp = false;
@@ -63,7 +61,7 @@ private:
 	Food food;
 	Color foodColor = Colors::Green;
 
-	int frameCounterMax = 5;
+	int frameCounterMax = 10;
 	int frameCounter = 0;
 	bool isGameOver = false;
 	bool GrowOnYourOwnPlz = false;

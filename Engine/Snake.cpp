@@ -36,8 +36,8 @@ void Snake::Move()
 
 		body[0]->FollowNextSeg(head);
 	}
-	
-	if ( -newDeltaLoc.x != deltaLoc.x || -newDeltaLoc.y != deltaLoc.y)
+
+	if (IsValidMove())
 	{
 		deltaLoc = newDeltaLoc;
 	}
@@ -52,8 +52,18 @@ void Snake::Grow()
 	}
 	else
 	{
-		Segment* temp_seg = new Segment(head.loc, bodyColor);
-		body[segCurrentSize] = temp_seg;
+		Segment* temp_seg = nullptr;
+		if (segCurrentSize == 0)
+		{
+			temp_seg = new Segment(head.loc, bodyColor);
+			body[segCurrentSize] = temp_seg;
+		}
+		else
+		{
+			temp_seg = new Segment(body[segCurrentSize - 1]->loc, bodyColor);
+			body[segCurrentSize] = temp_seg;
+		}
+
 
 		segCurrentSize++;
 	}
@@ -74,35 +84,45 @@ void Snake::Draw(Board& brd) const
 
 Location Snake::GetNextLocation() const
 {
+
 	return head.loc + newDeltaLoc;
 }
 
 bool Snake::WillCollideWithItself() const
 {
-	bool isCollidingWithBody = false;
-	for (int i = 0; i < segCurrentSize; i++)
+	if (IsValidMove())
 	{
-		if (GetNextLocation() == body[i]->loc) 
-		{
-			return true;
-		}
-	}
-	return isCollidingWithBody;
-}
-
-bool Snake::HasLocation(const Location& in_loc) const
-{
-	if (head.loc == in_loc) {
-		return true;
-	}
-	else {
+		bool isCollidingWithBody = false;
 		for (int i = 0; i < segCurrentSize; i++)
 		{
-			if (body[i]->loc == in_loc)
+			if (GetNextLocation() == body[i]->loc)
 			{
 				return true;
 			}
 		}
+		return isCollidingWithBody;
 	}
 	return false;
+}
+
+bool Snake::HasLocation(const Location& in_loc) const
+{
+	if (head.loc == in_loc || GetNextLocation() == in_loc) {
+		return true;
+	}
+
+	for (int i = 0; i < segCurrentSize; i++)
+	{
+		if (body[i]->loc == in_loc)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Snake::IsValidMove() const
+{
+	return -newDeltaLoc.x != deltaLoc.x || -newDeltaLoc.y != deltaLoc.y;
 }

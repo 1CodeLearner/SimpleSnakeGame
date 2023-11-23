@@ -36,6 +36,9 @@ private:
 		Location loc;
 		Color color;
 	};
+
+	bool IsValidMove() const;
+
 	Segment head;
 	int GrowthAmount = 1;
 	static constexpr int segTotalSize = 100;
@@ -47,4 +50,5 @@ private:
 	Location deltaLoc = { 1, 0 };
 
 	Graphics& gfx;
+
 };

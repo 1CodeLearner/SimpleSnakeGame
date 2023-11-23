@@ -141,15 +141,17 @@ void Game::ComposeFrame()
 void Game::RespawnFood()
 {
 	Location randomLoc;
+	int valueX = 0;
+	int valueY = 0;
+	std::mt19937 randomizer((int)time(0));
+	std::uniform_int_distribution<> rangeX(0, Board::gridWidthAmount - 1);
+	std::uniform_int_distribution<> rangeY(0, Board::gridHeightAmount - 1);
 	do
 	{
-		std::uniform_int_distribution<> rangeX(0, Board::gridWidthAmount - 1);
-		std::uniform_int_distribution<> rangeY(0, Board::gridHeightAmount - 1);
-		std::mt19937 randomizer(time(0));
-		int valueX = rangeX(randomizer);
-		int valueY = rangeY(randomizer);
+		valueX = rangeX(randomizer);
+		valueY = rangeY(randomizer);
 		randomLoc = Location(valueX, valueY);
 	} while (snek.HasLocation(randomLoc));
-	
+
 	food.ChangeLocation(randomLoc);
 }
