@@ -1,8 +1,9 @@
-#include "Board.h"
 #include <assert.h>
+#include "Board.h"
+#include "Snake.h"
 
 Board::Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor, Graphics& gfx)
-	: grid(in_grid), gridWidthAmount(in_gridWidthAmount), gridHeightAmount(in_gridHeightAmount), 
+	: grid(in_grid), gridWidthAmount(in_gridWidthAmount), gridHeightAmount(in_gridHeightAmount),
 	paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
 {
 }
@@ -14,15 +15,15 @@ void Board::Draw()
 	float boardSizeY = grid.GetHeight() * (float)gridHeightAmount;
 
 	//Find outer border coordinates
-	float x0 = grid.GetX() - paddingSize; 
+	float x0 = grid.GetX() - paddingSize;
 	float y0 = grid.GetY() - paddingSize;
-	float x1 = grid.GetX() + boardSizeX + paddingSize; 
-	float y1 = grid.GetY() + boardSizeY + paddingSize; 
+	float x1 = grid.GetX() + boardSizeX + paddingSize;
+	float y1 = grid.GetY() + boardSizeY + paddingSize;
 
 	if (x0 < 0 || x1 > gfx.ScreenWidth) {
 
 	}
-	else if (y0 < 0 || y1 > gfx.ScreenHeight){
+	else if (y0 < 0 || y1 > gfx.ScreenHeight) {
 
 	}
 	else {
@@ -46,12 +47,15 @@ void Board::Draw()
 
 void Board::DrawEntity(Location in_loc, Color in_color)
 {
-	assert(in_loc.x < gridWidthAmount);
-	assert(in_loc.y < gridHeightAmount);
-	
 	float leftGrid = grid.GetX() + (float)in_loc.x * grid.GetWidth();
 	float topGrid = grid.GetY() + (float)in_loc.y * grid.GetHeight();
 
 	Rect rectToDraw = Rect(leftGrid, topGrid, grid.GetWidth(), grid.GetHeight(), in_color);
 	rectToDraw.Draw(gfx);
+}
+
+bool Board::IsEntityOutOfBounds(const Snake& snek) const
+{
+	return snek.GetNextLocation().x >= gridWidthAmount || snek.GetNextLocation().x < 0
+		|| snek.GetNextLocation().y >= gridHeightAmount || snek.GetNextLocation().y < 0;
 }

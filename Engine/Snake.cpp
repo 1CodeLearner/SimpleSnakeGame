@@ -72,7 +72,7 @@ void Snake::Draw(Board& brd) const
 
 }
 
-Location Snake::GetLocation() const
+Location Snake::GetNextLocation() const
 {
-	return head.loc;
+	return head.loc + newDeltaLoc;
 }

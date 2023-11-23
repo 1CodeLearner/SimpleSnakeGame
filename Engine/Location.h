@@ -9,7 +9,7 @@ struct Location
 		y = in_y;
 	}
 
-	Location& operator+= (Location& otherLoc) 
+	Location& operator+= (const Location& otherLoc) 
 	{
 		x += otherLoc.x;
 		y += otherLoc.y;
@@ -17,7 +17,12 @@ struct Location
 		return *this;
 	}
 
-	bool operator== (const Location& otherLoc)
+	Location operator+ (const Location& otherLoc) const
+	{
+		return Location(x + otherLoc.x, y + otherLoc.y);
+	}
+
+	bool operator== (const Location& otherLoc) const
 	{
 		return x == otherLoc.x && y == otherLoc.y;
 	}

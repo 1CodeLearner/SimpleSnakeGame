@@ -15,7 +15,8 @@ public:
 	void Move();
 	void Grow();
 	void Draw(Board& brd) const;
-	Location GetLocation() const;
+	Location GetNextLocation() const;
+	
 private:
 	class Segment {
 	public:

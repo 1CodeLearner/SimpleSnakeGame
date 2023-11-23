@@ -7,7 +7,7 @@ Food::Food(Location in_loc, Color in_color)
 
 bool Food::IsBeingEaten(const Snake& snek)
 {
-	if (loc == snek.GetLocation() && !isEaten) 
+	if (loc == snek.GetNextLocation() && !isEaten) 
 	{
 		isEaten = true;
 		return isEaten;

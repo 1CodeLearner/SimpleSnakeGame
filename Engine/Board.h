@@ -10,9 +10,8 @@ public:
 	Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor, Graphics& gfx);
 
 	void Draw();
-
 	void DrawEntity(Location in_loc, Color in_color);
-
+	bool IsEntityOutOfBounds(const class Snake& snek) const;
 private:
 	Rect grid;
 	int gridWidthAmount;

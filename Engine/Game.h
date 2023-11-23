@@ -62,7 +62,8 @@ private:
 	Food food;
 	Color foodColor = Colors::Green;
 
-	int frameCounterMax = 20;
+	int frameCounterMax = 5;
 	int frameCounter = 0;
+	bool isGameOver = false;
 	/********************************/
 };

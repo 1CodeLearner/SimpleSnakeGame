@@ -25,7 +25,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	board(Rect(20.f, 20.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue,gfx),
+	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue, gfx),
 	snek(Location(2, 2), Colors::Blue, Colors::Yellow, gfx),
 	food(Location(2, 5), foodColor)
 {}
@@ -41,70 +41,84 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (food.IsBeingEaten(snek)) 
-	{
-		snek.Grow();
-	}
 
-	if (wnd.kbd.KeyIsPressed(VK_UP)) {
-		if (inhibitUp)
-		{
-		}
-		else {
-			snek.ChangeMoveDirection(Location(0, -1));
-			inhibitUp = true;
-		}
-	}
-	else {
-		inhibitUp = false;
-	}
 
-	if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
-		if (inhibitDown)
-		{
+	if (!isGameOver)
+	{
+		if (wnd.kbd.KeyIsPressed(VK_UP)) {
+			if (inhibitUp)
+			{
+			}
+			else {
+				snek.ChangeMoveDirection(Location(0, -1));
+				inhibitUp = true;
+			}
 		}
 		else {
-			snek.ChangeMoveDirection(Location(0, 1));
-			inhibitDown = true;
+			inhibitUp = false;
 		}
-	}
-	else {
-		inhibitDown = false;
-	}
 
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
-		if (inhibitRight)
-		{
+		if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+			if (inhibitDown)
+			{
+			}
+			else {
+				snek.ChangeMoveDirection(Location(0, 1));
+				inhibitDown = true;
+			}
 		}
 		else {
-			snek.ChangeMoveDirection(Location(1, 0));
-			inhibitRight = true;
+			inhibitDown = false;
 		}
-	}
-	else {
-		inhibitRight = false;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
-		if (inhibitLeft)
-		{
+
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+			if (inhibitRight)
+			{
+			}
+			else {
+				snek.ChangeMoveDirection(Location(1, 0));
+				inhibitRight = true;
+			}
 		}
 		else {
-			snek.ChangeMoveDirection(Location(-1, 0));
-			inhibitLeft = true;
+			inhibitRight = false;
 		}
-	}
-	else {
-		inhibitLeft = false;
-	}
-	
-	if (frameCounter != frameCounterMax)
-	{
-		frameCounter++;
-	}
-	else
-	{
-		snek.Move();
-		frameCounter = 0;
+		if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+			if (inhibitLeft)
+			{
+			}
+			else {
+				snek.ChangeMoveDirection(Location(-1, 0));
+				inhibitLeft = true;
+			}
+		}
+		else {
+			inhibitLeft = false;
+		}
+
+		if (frameCounter != frameCounterMax)
+		{
+			frameCounter++;
+		}
+		else
+		{
+			if (!board.IsEntityOutOfBounds(snek))
+			{
+				//Where game action happens, check all events here.
+				if (food.IsBeingEaten(snek))
+				{
+					snek.Grow();
+				}
+				snek.Move();
+				frameCounter = 0;
+			}
+			else {
+				isGameOver = true;
+			}
+
+		}
+
+
 	}
 }
 
@@ -113,5 +127,5 @@ void Game::ComposeFrame()
 	board.Draw();
 	food.Draw(board);
 	snek.Draw(board);
-	
+
 }
