@@ -37,7 +37,7 @@ private:
 		Color color;
 	};
 
-	bool IsValidMove() const;
+	bool IsValidMove(const Location& newDeltaMove) const;
 
 	Segment head;
 	int GrowthAmount = 1;

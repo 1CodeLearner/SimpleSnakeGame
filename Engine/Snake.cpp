@@ -21,8 +21,10 @@ void Snake::ChangeMoveDirection(const Location in_newDeltaLoc)
 	assert(in_newDeltaLoc.x <= 1 && in_newDeltaLoc.x >= -1);
 	assert(in_newDeltaLoc.y <= 1 && in_newDeltaLoc.y >= -1);
 
-	newDeltaLoc = in_newDeltaLoc;
-
+	if (IsValidMove(in_newDeltaLoc))
+	{
+		newDeltaLoc = in_newDeltaLoc;
+	}
 }
 
 void Snake::Move()
@@ -37,10 +39,7 @@ void Snake::Move()
 		body[0]->FollowNextSeg(head);
 	}
 
-	if (IsValidMove())
-	{
-		deltaLoc = newDeltaLoc;
-	}
+	deltaLoc = newDeltaLoc;
 	head.loc += deltaLoc;
 }
 
@@ -90,19 +89,16 @@ Location Snake::GetNextLocation() const
 
 bool Snake::WillCollideWithItself() const
 {
-	if (IsValidMove())
+
+	bool isCollidingWithBody = false;
+	for (int i = 0; i < segCurrentSize; i++)
 	{
-		bool isCollidingWithBody = false;
-		for (int i = 0; i < segCurrentSize; i++)
+		if (GetNextLocation() == body[i]->loc)
 		{
-			if (GetNextLocation() == body[i]->loc)
-			{
-				return true;
-			}
+			return true;
 		}
-		return isCollidingWithBody;
 	}
-	return false;
+	return isCollidingWithBody;
 }
 
 bool Snake::HasLocation(const Location& in_loc) const
@@ -122,7 +118,7 @@ bool Snake::HasLocation(const Location& in_loc) const
 	return false;
 }
 
-bool Snake::IsValidMove() const
+bool Snake::IsValidMove(const Location& newDeltaMove) const
 {
-	return -newDeltaLoc.x != deltaLoc.x || -newDeltaLoc.y != deltaLoc.y;
+	return -newDeltaMove.x != deltaLoc.x || -newDeltaMove.y != deltaLoc.y;
 }
