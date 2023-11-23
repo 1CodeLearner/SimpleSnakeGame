@@ -5,14 +5,9 @@ Food::Food(Location in_loc, Color in_color)
 	: loc(in_loc), color(in_color)
 {}
 
-bool Food::IsBeingEaten(const Snake& snek)
+bool Food::IsBeingEaten(const Snake& snek) const 
 {
-	if (loc == snek.GetNextLocation() && !isEaten) 
-	{
-		isEaten = true;
-		return isEaten;
-	}
-	return false;
+	return loc == snek.GetNextLocation() && !isEaten;
 }
 
 void Food::Draw(Board& brd) const
@@ -21,4 +16,9 @@ void Food::Draw(Board& brd) const
 	{
 		brd.DrawEntity(loc, color);
 	}
+}
+
+void Food::ChangeLocation(const Location& newLoc)
+{
+	loc = newLoc;
 }

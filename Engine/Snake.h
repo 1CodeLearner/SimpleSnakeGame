@@ -17,6 +17,7 @@ public:
 	void Draw(Board& brd) const;
 	Location GetNextLocation() const;
 	bool WillCollideWithItself() const;
+	bool HasLocation(const Location& in_loc) const;
 private:
 	class Segment {
 	public:

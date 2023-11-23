@@ -89,3 +89,20 @@ bool Snake::WillCollideWithItself() const
 	}
 	return isCollidingWithBody;
 }
+
+bool Snake::HasLocation(const Location& in_loc) const
+{
+	if (head.loc == in_loc) {
+		return true;
+	}
+	else {
+		for (int i = 0; i < segCurrentSize; i++)
+		{
+			if (body[i]->loc == in_loc)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}

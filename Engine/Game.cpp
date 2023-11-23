@@ -25,7 +25,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), boardWidthTotal, boardHeightTotal, 5.f, Colors::Blue, gfx),
+	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), 5.f, Colors::Blue, gfx),
 	snek(Location(2, 2), Colors::Blue, Colors::Yellow, gfx),
 	food(Location(2, 5), foodColor)
 {}
@@ -116,6 +116,7 @@ void Game::UpdateModel()
 				if (food.IsBeingEaten(snek))
 				{
 					snek.Grow();
+					RespawnFood();
 				}
 				if (GrowOnYourOwnPlz)
 				{
@@ -134,4 +135,21 @@ void Game::ComposeFrame()
 	board.Draw();
 	food.Draw(board);
 	snek.Draw(board);
+}
+
+
+void Game::RespawnFood()
+{
+	Location randomLoc;
+	do
+	{
+		std::uniform_int_distribution<> rangeX(0, Board::gridWidthAmount - 1);
+		std::uniform_int_distribution<> rangeY(0, Board::gridHeightAmount - 1);
+		std::mt19937 randomizer(time(0));
+		int valueX = rangeX(randomizer);
+		int valueY = rangeY(randomizer);
+		randomLoc = Location(valueX, valueY);
+	} while (snek.HasLocation(randomLoc));
+	
+	food.ChangeLocation(randomLoc);
 }

@@ -2,9 +2,8 @@
 #include "Board.h"
 #include "Snake.h"
 
-Board::Board(Rect in_grid, int in_gridWidthAmount, int in_gridHeightAmount, float in_paddingSize, Color in_outerColor, Graphics& gfx)
-	: grid(in_grid), gridWidthAmount(in_gridWidthAmount), gridHeightAmount(in_gridHeightAmount),
-	paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
+Board::Board(Rect in_grid, float in_paddingSize, Color in_outerColor, Graphics& gfx)
+	: grid(in_grid), paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
 {
 }
 
