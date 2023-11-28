@@ -29,6 +29,7 @@
 #include "Location.h"
 #include <random>
 #include <ctime>
+#include "DeltaTime.h"
 
 class Game
 {
@@ -65,5 +66,6 @@ private:
 	int frameCounter = 0;
 	bool isGameOver = false;
 	bool GrowOnYourOwnPlz = false;
+	DeltaTime dt;
 	/********************************/
 };
