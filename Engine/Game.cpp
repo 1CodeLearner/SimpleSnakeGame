@@ -101,9 +101,9 @@ void Game::UpdateModel()
 			inhibitLeft = false;
 		}
 
-		if (frameCounter != frameCounterMax)
+		if (secondCounter <= secondCounterMax)
 		{
-			frameCounter++;
+			secondCounter += dt.Mark();
 		}
 		else
 		{
@@ -124,7 +124,7 @@ void Game::UpdateModel()
 					GrowOnYourOwnPlz = false;
 				}
 				snek.Move();
-				frameCounter = 0;
+				secondCounter = 0.f;
 			}
 		}
 	}

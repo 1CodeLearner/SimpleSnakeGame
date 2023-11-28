@@ -62,8 +62,8 @@ private:
 	Food food;
 	Color foodColor = Colors::Green;
 
-	int frameCounterMax = 10;
-	int frameCounter = 0;
+	float secondCounterMax = .3f;
+	float secondCounter = 0.f;
 	bool isGameOver = false;
 	bool GrowOnYourOwnPlz = false;
 	DeltaTime dt;
