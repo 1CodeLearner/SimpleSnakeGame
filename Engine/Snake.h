@@ -14,6 +14,7 @@ public:
 	void ChangeMoveDirection(const Location in_newDeltaLoc);
 	void Move();
 	void Grow();
+	int GetSegCurrentSize() const;
 	void Draw(Board& brd) const;
 	Location GetNextLocation() const;
 	bool WillCollideWithItself() const;

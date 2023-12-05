@@ -28,8 +28,9 @@ Game::Game(MainWindow& wnd)
 	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), 5.f, Colors::Blue, gfx),
 	snek(Location(2, 2), Colors::Blue, Colors::Yellow, gfx),
 	food(Location(2, 5), foodColor)
-{}
-
+{
+	maxTime = maxTimeFixed * timeScaleFixed;
+}
 void Game::Go()
 {
 	gfx.BeginFrame();
@@ -45,11 +46,6 @@ void Game::UpdateModel()
 
 	if (!isGameOver)
 	{
-		if (wnd.kbd.KeyIsPressed(VK_SPACE))
-		{
-			GrowOnYourOwnPlz = true;
-		}
-
 		if (wnd.kbd.KeyIsPressed(VK_UP)) {
 			if (inhibitUp)
 			{
@@ -88,6 +84,7 @@ void Game::UpdateModel()
 		else {
 			inhibitRight = false;
 		}
+
 		if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
 			if (inhibitLeft)
 			{
@@ -100,10 +97,10 @@ void Game::UpdateModel()
 		else {
 			inhibitLeft = false;
 		}
-
-		if (secondCounter <= secondCounterMax)
+		
+		if (counterTime <= maxTime)
 		{
-			secondCounter += dt.Mark();
+			counterTime += dt.Mark();
 		}
 		else
 		{
@@ -117,14 +114,10 @@ void Game::UpdateModel()
 				{
 					snek.Grow();
 					RespawnFood();
-				}
-				if (GrowOnYourOwnPlz)
-				{
-					snek.Grow();
-					GrowOnYourOwnPlz = false;
+					CalculateSnakeSpeed();
 				}
 				snek.Move();
-				secondCounter = 0.f;
+				counterTime = 0.f;
 			}
 		}
 	}

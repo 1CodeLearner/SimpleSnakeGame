@@ -62,10 +62,29 @@ private:
 	Food food;
 	Color foodColor = Colors::Green;
 
-	float secondCounterMax = .3f;
-	float secondCounter = 0.f;
+
+	const float timeScaleFixed = 2.f;
+	float timeScaleMax = 1.f;
+	float timeScaleDelta = -.1;
+
+	const float maxTimeFixed = .1f;
+
+	float maxTime = 0.f;
+	float counterTime = 0.f;
+	
 	bool isGameOver = false;
-	bool GrowOnYourOwnPlz = false;
 	DeltaTime dt;
+
+	void CalculateSnakeSpeed()
+	{
+		if (snek.GetSegCurrentSize() != 0)
+		{
+			const float timeScaleCurrent = timeScaleFixed + timeScaleDelta * snek.GetSegCurrentSize();
+			if (timeScaleCurrent > timeScaleMax)
+			{
+				maxTime = maxTimeFixed * timeScaleCurrent;
+			}
+		}
+	}
 	/********************************/
 };

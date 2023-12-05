@@ -68,6 +68,11 @@ void Snake::Grow()
 	}
 }
 
+int Snake::GetSegCurrentSize() const
+{
+	return segCurrentSize;
+}
+
 void Snake::Draw(Board& brd) const
 {
 	if (segCurrentSize != 0)
