@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), 5.f, Colors::Blue, gfx),
-	snek(Location(2, 2), Colors::Blue, Colors::Yellow, gfx),
+	snek(Location(2, 2), Colors::Yellow, Colors::Blue, gfx),
 	food(Location(2, 5), foodColor)
 {
 	maxTime = maxTimeFixed * timeScaleFixed;
