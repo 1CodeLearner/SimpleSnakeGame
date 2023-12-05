@@ -42,8 +42,6 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-
-
 	if (!isGameOver)
 	{
 		if (wnd.kbd.KeyIsPressed(VK_UP)) {
@@ -137,8 +135,8 @@ void Game::RespawnFood()
 	int valueX = 0;
 	int valueY = 0;
 	std::mt19937 randomizer((int)time(0));
-	std::uniform_int_distribution<> rangeX(0, Board::gridWidthAmount - 1);
-	std::uniform_int_distribution<> rangeY(0, Board::gridHeightAmount - 1);
+	std::uniform_int_distribution<> rangeX(0, Board::gridAmountInWidth - 1);
+	std::uniform_int_distribution<> rangeY(0, Board::gridAmountInHeight - 1);
 	do
 	{
 		valueX = rangeX(randomizer);

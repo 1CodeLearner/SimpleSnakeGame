@@ -2,26 +2,28 @@
 #include "Board.h"
 #include "Snake.h"
 
-Board::Board(Rect in_grid, float in_paddingSize, Color in_outerColor, Graphics& gfx)
-	: grid(in_grid), paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
+Board::Board(Rect _oneGridDim, float in_paddingSize, Color in_outerColor, Graphics& gfx)
+	: oneGridDim(_oneGridDim), paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
 {
 }
 
 void Board::Draw()
 {
 	//find playing board size in pixel counts
-	float boardSizeX = grid.GetWidth() * (float)gridWidthAmount;
-	float boardSizeY = grid.GetHeight() * (float)gridHeightAmount;
+	float boardSizeX = oneGridDim.GetWidth() * (float)gridAmountInWidth;
+	float boardSizeY = oneGridDim.GetHeight() * (float)gridAmountInHeight;
 
 	//Find outer border coordinates
-	float x0 = grid.GetX() - paddingSize;
-	float y0 = grid.GetY() - paddingSize;
-	float x1 = grid.GetX() + boardSizeX + paddingSize;
-	float y1 = grid.GetY() + boardSizeY + paddingSize;
+	float x0 = oneGridDim.GetX() - paddingSize;
+	float y0 = oneGridDim.GetY() - paddingSize;
+	float x1 = oneGridDim.GetX() + boardSizeX + paddingSize;
+	float y1 = oneGridDim.GetY() + boardSizeY + paddingSize;
 
+	//Check out-of-bounds
 	if (x0 < 0 || x1 > gfx.ScreenWidth) {
 
 	}
+	//Check out-of-bounds
 	else if (y0 < 0 || y1 > gfx.ScreenHeight) {
 
 	}
@@ -34,9 +36,9 @@ void Board::Draw()
 		}
 
 		//Draw playing board within outer border
-		for (int i = (int)grid.GetX(); i <= (int)(grid.GetX() + boardSizeX); i++) {
-			for (int j = (int)grid.GetY(); j <= (int)(grid.GetY() + boardSizeY); j++) {
-				gfx.PutPixel(i, j, grid.GetColor());
+		for (int i = (int)oneGridDim.GetX(); i <= (int)(oneGridDim.GetX() + boardSizeX); i++) {
+			for (int j = (int)oneGridDim.GetY(); j <= (int)(oneGridDim.GetY() + boardSizeY); j++) {
+				gfx.PutPixel(i, j, oneGridDim.GetColor());
 			}
 		}
 	}
@@ -46,15 +48,15 @@ void Board::Draw()
 
 void Board::DrawEntity(Location in_loc, Color in_color)
 {
-	float leftGrid = grid.GetX() + (float)in_loc.x * grid.GetWidth();
-	float topGrid = grid.GetY() + (float)in_loc.y * grid.GetHeight();
+	float leftGrid = oneGridDim.GetX() + (float)in_loc.x * oneGridDim.GetWidth();
+	float topGrid = oneGridDim.GetY() + (float)in_loc.y * oneGridDim.GetHeight();
 
-	Rect rectToDraw = Rect(leftGrid, topGrid, grid.GetWidth(), grid.GetHeight(), in_color);
+	Rect rectToDraw = Rect(leftGrid, topGrid, oneGridDim.GetWidth(), oneGridDim.GetHeight(), in_color);
 	rectToDraw.Draw(gfx);
 }
 
 bool Board::IsEntityOutOfBounds(const Snake& snek) const
 {
-	return snek.GetNextLocation().x >= gridWidthAmount || snek.GetNextLocation().x < 0
-		|| snek.GetNextLocation().y >= gridHeightAmount || snek.GetNextLocation().y < 0;
+	return snek.GetNextLocation().x >= gridAmountInWidth || snek.GetNextLocation().x < 0
+		|| snek.GetNextLocation().y >= gridAmountInHeight || snek.GetNextLocation().y < 0;
 }
