@@ -14,7 +14,7 @@ Snake::Snake(Location in_loc, Color in_headColor,
 
 Snake::~Snake()
 {
-	//delete[] body;
+	delete[] body;
 }
 
 void Snake::ChangeMoveDirection(const Location in_newDeltaLoc)
@@ -131,4 +131,8 @@ bool Snake::HasLocation(const Location& in_loc) const
 bool Snake::IsValidMove(const Location& newDeltaMove) const
 {
 	return -newDeltaMove.x != deltaLoc.x || -newDeltaMove.y != deltaLoc.y;
+}
+
+Snake::Segment::~Segment()
+{
 }

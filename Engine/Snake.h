@@ -9,6 +9,7 @@ class Snake
 public:
 	Snake(Location in_loc, Color in_headColor, 
 		Color in_bodyColor, Graphics& in_gfx);
+	Snake& operator= (const Snake& other) = delete;
 	~Snake();
 public:
 	void ChangeMoveDirection(const Location in_newDeltaLoc);
@@ -28,6 +29,7 @@ private:
 		{
 			loc = in_loc;
 		}
+		~Segment();
 	public:
 		void FollowNextSeg(Segment& next_seg)
 		{
@@ -44,7 +46,7 @@ private:
 	int GrowthAmount = 1;
 	static constexpr int segTotalSize = 100;
 	int segCurrentSize = 0;
-	Segment* body[segTotalSize];
+	Segment* body[segTotalSize] = { nullptr };
 	Color bodyColor;
 
 	Location newDeltaLoc = { 1, 0 };
