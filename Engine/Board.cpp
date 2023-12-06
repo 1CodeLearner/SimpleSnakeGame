@@ -1,11 +1,17 @@
 #include <assert.h>
 #include "Board.h"
 #include "Snake.h"
+#include "Food.h"
+#include <random>
+#include <ctime>
 
 Board::Board(Rect _oneGridDim, float in_paddingSize, Color in_outerColor, Graphics& gfx)
-	: oneGridDim(_oneGridDim), paddingSize(in_paddingSize), outerColor(in_outerColor), gfx(gfx)
+	: oneGridDim(_oneGridDim), paddingSize(in_paddingSize), 
+	outerColor(in_outerColor), gfx(gfx)
 {
 }
+
+
 
 void Board::Draw()
 {
@@ -43,7 +49,20 @@ void Board::Draw()
 		}
 	}
 
-
+	if(isEnableObstacle)
+	{
+		int totalGrids = gridAmountInHeight * gridAmountInWidth;
+		for (int i = 0; i < gridAmountInWidth; i++)
+		{
+			for (int j = 0; j < gridAmountInHeight; j++)
+			{
+				if (Obstacles[i * gridAmountInWidth + j])
+				{
+					DrawEntity(Location{ j,i }, Colors::Red);
+				}
+			}
+		}
+	}
 }
 
 void Board::DrawEntity(Location in_loc, Color in_color)
@@ -59,4 +78,41 @@ bool Board::IsEntityOutOfBounds(const Snake& snek) const
 {
 	return snek.GetNextLocation().x >= gridAmountInWidth || snek.GetNextLocation().x < 0
 		|| snek.GetNextLocation().y >= gridAmountInHeight || snek.GetNextLocation().y < 0;
+}
+
+void Board::InitializeBoard(const Snake& snek, const Food& food)
+{
+	assert(numObstacles < gridAmountInHeight * gridAmountInWidth);
+
+	std::mt19937 random((unsigned int)time(NULL));
+	std::uniform_int_distribution<int> distX(0, gridAmountInWidth - 1);
+	std::uniform_int_distribution<int> distY(0, gridAmountInHeight - 1);
+
+	if (isEnableObstacle)
+	{
+		int x;
+		int y;
+
+		for (int i = 0; i < numObstacles; i++)
+		{
+			do
+			{
+				x = distX(random);
+				y = distY(random);
+			} while (
+				snek.HasLocation(Location(x, y)) && food.HasLocation(Location(x, y)) && 
+				Obstacles[y * gridAmountInWidth + x]
+			);
+			Obstacles[y * gridAmountInWidth + x] = true;
+		}
+	}
+
+}
+
+void Board::SetObstacles(int numObstacles, bool _isEnableObstacle)
+{
+	assert(numObstacles < gridAmountInHeight * gridAmountInWidth);
+	
+	isEnableObstacle = _isEnableObstacle;
+	this->numObstacles = numObstacles;
 }

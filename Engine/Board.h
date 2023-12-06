@@ -12,13 +12,19 @@ public:
 	void Draw();
 	void DrawEntity(Location in_loc, Color in_color);
 	bool IsEntityOutOfBounds(const class Snake& snek) const;
+	void InitializeBoard(const Snake& snek, const class Food& food);
+	void SetObstacles(int numObstacles = 1, bool _isEnableObstacle = true);
+
+public:
+	static constexpr int gridAmountInWidth = 3;
+	static constexpr int gridAmountInHeight = 3;
+
 private:
+	bool isEnableObstacle = false; 
 	Rect oneGridDim;
 	float paddingSize;
 	Color outerColor;
 	Graphics& gfx;
-public:
-	static constexpr int gridAmountInWidth = 20;
-	static constexpr int gridAmountInHeight = 20;
-	
+	int numObstacles = 0;
+	bool Obstacles[gridAmountInWidth * gridAmountInHeight] = { false };
 };

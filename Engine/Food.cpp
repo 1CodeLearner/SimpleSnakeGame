@@ -22,3 +22,8 @@ void Food::ChangeLocation(const Location& newLoc)
 {
 	loc = newLoc;
 }
+
+bool Food::HasLocation(const Location& _loc) const
+{
+	return loc == _loc;
+}

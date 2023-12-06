@@ -14,6 +14,7 @@ public:
 	bool IsBeingEaten(const Snake& snek) const;
 	void Draw(Board& brd) const;
 	void ChangeLocation(const Location& newLoc);
+	bool HasLocation(const Location& _loc) const;
 private:
 	Location loc;
 	Color color;

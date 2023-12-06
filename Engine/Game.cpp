@@ -26,10 +26,12 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	board(Rect(50.f, 50.f, 25.f, 25.f, Colors::Gray), 5.f, Colors::Blue, gfx),
-	snek(Location(2, 2), Colors::Yellow, Colors::Blue, gfx),
-	food(Location(2, 5), foodColor)
+	snek(Location(0, 0), Colors::Yellow, Colors::Blue, gfx),
+	food(Location(1, 1), foodColor)
 {
 	maxTime = maxTimeFixed * timeScaleFixed;
+	board.SetObstacles(8, true);
+	board.InitializeBoard(snek, food);
 }
 void Game::Go()
 {
@@ -143,6 +145,6 @@ void Game::RespawnFood()
 		valueY = rangeY(randomizer);
 		randomLoc = Location(valueX, valueY);
 	} while (snek.HasLocation(randomLoc));
-
+	
 	food.ChangeLocation(randomLoc);
 }
