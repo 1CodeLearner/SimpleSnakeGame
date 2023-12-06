@@ -1,5 +1,6 @@
 #include "Snake.h"
 #include "Graphics.h"
+#include "GameState.h"
 #include <assert.h>
 
 Snake::Snake(Location in_loc, Color in_headColor,
@@ -108,6 +109,11 @@ bool Snake::WillCollideWithItself() const
 
 bool Snake::HasLocation(const Location& in_loc) const
 {
+	if (!GameState::hasGameStarted)
+	{
+		return head.loc == in_loc;
+	}
+
 	if (head.loc == in_loc || GetNextLocation() == in_loc) {
 		return true;
 	}
@@ -119,7 +125,6 @@ bool Snake::HasLocation(const Location& in_loc) const
 			return true;
 		}
 	}
-
 	return false;
 }
 

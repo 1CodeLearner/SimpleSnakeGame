@@ -12,12 +12,12 @@ public:
 	void Draw();
 	void DrawEntity(Location in_loc, Color in_color);
 	bool IsEntityOutOfBounds(const class Snake& snek) const;
+	bool CollidesWithObstacles(const class Snake& snek) const;
 	void InitializeBoard(const Snake& snek, const class Food& food);
 	void SetObstacles(int numObstacles = 1, bool _isEnableObstacle = true);
-
 public:
-	static constexpr int gridAmountInWidth = 3;
-	static constexpr int gridAmountInHeight = 3;
+	static constexpr int gridAmountInWidth = 10;
+	static constexpr int gridAmountInHeight = 10;
 
 private:
 	bool isEnableObstacle = false; 

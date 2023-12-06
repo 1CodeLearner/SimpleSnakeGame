@@ -27,9 +27,9 @@
 #include "Snake.h"
 #include "Food.h"
 #include "Location.h"
+#include "DeltaTime.h"
 #include <random>
 #include <ctime>
-#include "DeltaTime.h"
 
 class Game
 {
@@ -72,8 +72,8 @@ private:
 	float maxTime = 0.f;
 	float counterTime = 0.f;
 	
-	bool isGameOver = false;
-	DeltaTime dt;
+	class DeltaTime dt;
+
 
 	void CalculateSnakeSpeed()
 	{

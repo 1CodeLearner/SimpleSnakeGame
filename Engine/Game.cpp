@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "GameState.h"
 
 Game::Game(MainWindow& wnd)
 	:
@@ -30,9 +31,12 @@ Game::Game(MainWindow& wnd)
 	food(Location(1, 1), foodColor)
 {
 	maxTime = maxTimeFixed * timeScaleFixed;
-	board.SetObstacles(8, true);
+	//Don't change these yet. They depend on each other.
+	board.SetObstacles(7, true);
 	board.InitializeBoard(snek, food);
+	GameState::hasGameStarted = true;
 }
+
 void Game::Go()
 {
 	gfx.BeginFrame();
@@ -44,7 +48,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (!isGameOver)
+	if (!GameState::isGameOver)
 	{
 		if (wnd.kbd.KeyIsPressed(VK_UP)) {
 			if (inhibitUp)
@@ -104,9 +108,12 @@ void Game::UpdateModel()
 		}
 		else
 		{
-			if (board.IsEntityOutOfBounds(snek) || snek.WillCollideWithItself())
+			if (board.IsEntityOutOfBounds(snek) ||
+				snek.WillCollideWithItself() ||
+				board.CollidesWithObstacles(snek)
+			)
 			{
-				isGameOver = true;
+				GameState::isGameOver = true;
 			}
 			else {
 				//Where game action happens, check all events here.

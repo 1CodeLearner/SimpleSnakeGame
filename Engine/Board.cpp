@@ -80,6 +80,13 @@ bool Board::IsEntityOutOfBounds(const Snake& snek) const
 		|| snek.GetNextLocation().y >= gridAmountInHeight || snek.GetNextLocation().y < 0;
 }
 
+bool Board::CollidesWithObstacles(const Snake& snek) const
+{
+	Location SnekNextLoc = snek.GetNextLocation();
+
+	return Obstacles[SnekNextLoc.y * gridAmountInWidth + SnekNextLoc.x];
+}
+
 void Board::InitializeBoard(const Snake& snek, const Food& food)
 {
 	assert(numObstacles < gridAmountInHeight * gridAmountInWidth);
@@ -100,7 +107,7 @@ void Board::InitializeBoard(const Snake& snek, const Food& food)
 				x = distX(random);
 				y = distY(random);
 			} while (
-				snek.HasLocation(Location(x, y)) && food.HasLocation(Location(x, y)) && 
+				snek.HasLocation(Location(x, y)) || food.HasLocation(Location(x, y)) ||
 				Obstacles[y * gridAmountInWidth + x]
 			);
 			Obstacles[y * gridAmountInWidth + x] = true;
