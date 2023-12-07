@@ -14,7 +14,12 @@ Snake::Snake(Location in_loc, Color in_headColor,
 
 Snake::~Snake()
 {
-	delete[] body;
+	//delete[] body;
+
+	for (int i = 0; i < segTotalSize; i++ )
+	{
+		delete body[i];
+	}
 }
 
 void Snake::ChangeMoveDirection(const Location in_newDeltaLoc)
